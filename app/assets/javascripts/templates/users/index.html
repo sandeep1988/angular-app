@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-primary" href="#/users/new">Create a user</a>
+        <a class="btn btn-primary" href="#/products/new">Create a Product</a>
+        <a class="btn btn-primary" href="#/inventories/new">Create a Inventory</a> <br />
+        <form class="navbar-form navbar-left" role="search" method="get" id="search">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class="search-query form-control" placeholder="Search"  name="searchKeyword" ng-model="query1">
+                </div>
+            </div>
+        </form><br />
+        <table class="table table-striped">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Salary</th>
+                <th>Gender</th>
+                <th>Created Date</th>
+                <th></th>
+            </tr>
+            <tr ng-hide="users.length" >
+                <td colspan="5">No users found, Please create one.</td>
+            </tr>
+            <tr ng-show="users.length" ng-repeat="user in users | filter:query1 | orderBy: 'salary' ">
+                <td>{{user.first_name | makeUppercase  }}</td>
+                <td>{{user.last_name | makeUppercase }}</td>
+                <td>{{user.email }}</td>
+                <td>{{user.salary | currency : '&#8377;' }}</td>
+                <td ng-if ="user.gender==1"> Female </td>
+                <td ng-if ="user.gender==0"> Male </td>
+                <td>{{user.created_at | date : 'fullDate'  }}</td>
+                <td><a href="" ng-click="deleteUser(user.id)">Remove</a></td>
+            </tr>
+        </table>
+        <br>
+    </div>
+</div>
+
+
+
+
+
+
+
